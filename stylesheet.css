@@ -1,0 +1,23 @@
+html, * {
+  font-family: Consolas, Monaco, "Lucida Console", "Andale Mono";
+}
+
+.forecast-chart__expiries {
+  fill: red;
+  fill-opacity: 1;
+  stroke: red;
+  stroke-width: 1;
+}
+
+.forecast-chart__shipments {
+  fill: black;
+  fill-opacity: 1;
+  stroke: black;
+  stroke-width: 1;
+}
+
+.forecast-chart__line {
+  stroke-width: 2;
+  stroke: black;
+  fill: none;
+}

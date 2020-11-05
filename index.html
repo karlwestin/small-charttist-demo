@@ -1,0 +1,61 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <!-- <link rel="stylesheet" href="static/chartist.css" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css" integrity="sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+  </head>
+  <body>
+      <h1>Small Chartist Demo</h1>
+      <div id='chart'></div>
+
+      <hr>
+      <p>
+        <a href="app.js">Code is here</a>
+      </p>
+      <hr>
+      <pre>
+// Approximate data format:
+{
+  labels: ['May', 'June', 'July', 'August', 'Septembre', 'Octobre', 'Novembre'],
+  series: [
+    [ {
+        value: 120,
+        meta: {}
+      },
+      {
+        value: 150,
+        meta: {
+          expiries: 20,
+          shipments: 40,
+        }
+      },
+      {
+        value: 50,
+        meta: {
+          expiries: 70,
+          shipments: 30
+        }
+      },
+      {
+        value: 100,
+        meta: {
+          expiries: 0,
+          shipments: 60
+        }
+      },
+      { value: 70, meta: {} },
+      { value: 55 , meta: { expiries: 10 } },
+      { value: 40 }
+    ]
+  ]
+}
+      </pre>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.js'></script>
+      <!-- <script src='static/chartist.js'></script> -->
+      <script src='app.js'></script>
+  </body>
+</html>
