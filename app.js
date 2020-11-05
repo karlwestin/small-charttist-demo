@@ -93,7 +93,6 @@ function lineWithGaps(pathCoordinates, valueData) {
 // and to replace the points where we draw events with black/red bars
 function expiryShipmentBars (item) {
   if (item.type !== 'point') {
-    console.log('Item', item)
     return
   }
 
@@ -154,6 +153,50 @@ function expiryShipmentBars (item) {
   item.element.remove()
 }
 
+// Draw Min/Max rectangles:
+function drawThresholds (chart) {
+  // Use the chart bounding box for some baseline values
+  const baseY = chart.axisY.chartRect.y1
+  const xLeft = chart.axisY.chartRect.x1
+  const xRight = chart.axisY.chartRect.x2
+
+  // calculate Y values based on the y-axis
+  const getY = (value) => {
+    return baseY - chart.axisY.projectValue(value)
+  }
+
+  const thresholds = {
+    min: 40,
+    max: 100,
+    excess: 125
+  }
+
+  // Create the elements and append them to the grid SVG group
+  minArea = new Chartist.Svg('path', {
+    d: [
+      'M', xLeft, getY(0),
+      'L', xLeft, getY(thresholds.min),
+      'L', xRight, getY(thresholds.min),
+      'L', xRight, getY(0),
+      'z'
+    ].join(' ')
+  }, 'forecast-chart__thresholds forecast-chart__thresholds--min')
+
+  maxArea = new Chartist.Svg('path', {
+    d: [
+      'M', xLeft, getY(thresholds.max),
+      'L', xLeft, getY(thresholds.excess),
+      'L', xRight, getY(thresholds.excess),
+      'L', xRight, getY(thresholds.max),
+      'z'
+    ].join(' ')
+  }, 'forecast-chart__thresholds forecast-chart__thresholds--max')
+
+  const gridGroup = chart.svg.querySelector('.ct-grids')
+  gridGroup.append(minArea)
+  gridGroup.append(maxArea)
+}
+
 const chart = new Chartist.Line('#chart', {
   // Here's the input data for the chart:
   labels: ['May', 'June', 'July', 'August', 'Septembre', 'Octobre', 'Novembre'],
@@ -202,3 +245,4 @@ const chart = new Chartist.Line('#chart', {
 
 // Trigger the function to draw black/red bars
 chart.on('draw', expiryShipmentBars)
+chart.on('created', drawThresholds)

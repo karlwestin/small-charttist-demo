@@ -21,3 +21,16 @@ html, * {
   stroke: black;
   fill: none;
 }
+
+.forecast-chart__thresholds {
+  stroke: none;
+  fill-opacity: 0.1
+}
+
+.forecast-chart__thresholds--min {
+  fill: red;
+}
+
+.forecast-chart__thresholds--max {
+  fill: green;
+}
