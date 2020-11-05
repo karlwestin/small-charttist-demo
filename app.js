@@ -1,5 +1,25 @@
 // Sets the width of the rectangles
 const RECT_WIDTH = 20
+const data = {
+  // Here's the input data for the chart:
+  labels: ['May', 'June', 'July', 'August', 'Septembre', 'Octobre', 'Novembre'],
+  thresholds: {
+    min: 30,
+    max: 100,
+    excess: 125
+  },
+  series: [
+    [
+      { value: 120, meta: {} },
+      { value: 150, meta: { expiries: 20, shipments: 40, } },
+      { value: 50, meta: { expiries: 70, shipments: 30 } },
+      { value: 100, meta: { expiries: 0, shipments: 60 } },
+      { value: 70, meta: {} },
+      { value: 55 , meta: { expiries: 10 } },
+      { value: 40 }
+    ]
+  ]
+}
 
 // Draw a line with gaps
 // ----------
@@ -154,6 +174,7 @@ function expiryShipmentBars (item) {
 }
 
 // Draw Min/Max rectangles:
+// ----------
 function drawThresholds (chart) {
   // Use the chart bounding box for some baseline values
   const baseY = chart.axisY.chartRect.y1
@@ -165,12 +186,7 @@ function drawThresholds (chart) {
     return baseY - chart.axisY.projectValue(value)
   }
 
-  const thresholds = {
-    min: 40,
-    max: 100,
-    excess: 125
-  }
-
+  const thresholds = data.thresholds
   // Create the elements and append them to the grid SVG group
   minArea = new Chartist.Svg('path', {
     d: [
@@ -197,21 +213,9 @@ function drawThresholds (chart) {
   gridGroup.append(maxArea)
 }
 
-const chart = new Chartist.Line('#chart', {
-  // Here's the input data for the chart:
-  labels: ['May', 'June', 'July', 'August', 'Septembre', 'Octobre', 'Novembre'],
-  series: [
-    [
-      { value: 120, meta: {} },
-      { value: 150, meta: { expiries: 20, shipments: 40, } },
-      { value: 50, meta: { expiries: 70, shipments: 30 } },
-      { value: 100, meta: { expiries: 0, shipments: 60 } },
-      { value: 70, meta: {} },
-      { value: 55 , meta: { expiries: 10 } },
-      { value: 40 }
-    ]
-  ]
-}, {
+// Instantiate the graph
+// ----------
+const chart = new Chartist.Line('#chart', data, {
   fullWidth: true,
   height: 400,
   // the points are used to place out expiry & shipment bars
